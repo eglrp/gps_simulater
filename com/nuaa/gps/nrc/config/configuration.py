@@ -1,0 +1,51 @@
+import numpy as np
+
+
+class gps_config:
+    sign_set_c = 299792458
+    sign_set_g = 9.7803698
+    sign_set_ell_a_gps = 6378137
+    sign_set_ell_a_bds = 6378136
+    sign_set_ell_f_gps = 1 / 298.257223563
+    sign_set_ell_f_bds = 1 / 298.257222101
+    sign_set_ell_e_gps = np.sqrt(1 - (1 - sign_set_ell_f_gps) ^ 2)
+    sign_set_ell_e_bds = np.sqrt(1 - (1 - sign_set_ell_f_bds) ^ 2)
+    sign_set_gm_gps = 3.986005e14
+    sign_set_gm_bds = 3.986004418e14
+    sign_set_earth_wie_gps = 7.2921151467e-5
+    sign_set_earth_wie_bds = 7.292115e-5
+    sign_set_pi_orbit = 3.1415926535898
+    sign_set_l1 = 1575.42e6
+    sign_set_l2 = 1227.60e6
+    sign_set_l5 = 1176.45e6
+    sign_set_g_bo1 = 0.1903
+    sign_set_g_bo2 = 0.2442
+    sign_set_g_bo5 = 0.2548
+    sign_set_b1 = 1561.098e6
+    sign_set_b2 = 1207.140e6
+    sign_set_b3 = 1268.520e6
+    sign_set_b_bo1 = 0.1920
+    sign_set_b_bo2 = 0.2483
+    sign_set_b_bo5 = 0.2363
+    sign_set_code = 29.3
+    sign_set_phase = 0.08
+    sign_set_std_code = 3
+    sign_set_std_phase = 0.03
+    sign_set_std_phase_if = 0.009
+    sign_set_delta_clock = 4.47e-09
+    sign_set_delta_r_clock = 31
+    sign_set_eph_file = 'G:\matlab\GNSS_INS组合相对导航\RINEX\brdc1980.17n'
+    sign_set_prnmat = np.array([2, 5, 7, 9, 10, 25, 30])
+    sign_set_start_time = 0
+    sign_set_end_time = 20
+    sign_set_td_period = 0.2
+    sign_set_data_length = 1 + (sign_set_end_time - sign_set_start_time) / sign_set_td_period;
+    sign_set_carr_init_phase = 0
+    sign_set_wie = 7.2921151467e-5
+    sign_set_init_atti_m = [0, 0, 0]
+    sign_set_init_atti_r = [0, 0, 0]
+    sign_set_init_posi_m = [118, 32, 500]
+    sign_set_init_posi_r = [118, 32, 800]
+    sign_set_init_velo_m = [0, 0, 0]
+    sign_set_init_velo_r = [0, 0, 0]
+    sign_set_t_sate = 86400
