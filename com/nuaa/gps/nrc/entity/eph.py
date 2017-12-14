@@ -1,8 +1,5 @@
 import re
 
-import numpy as np
-from pandas import Series
-
 
 class eph:
     def __init__(self, text):
