@@ -9,8 +9,8 @@ class gpsConfig:
         self.sign_set_ell_a_bds = 6378136
         self.sign_set_ell_f_gps = 1 / 298.257223563
         self.sign_set_ell_f_bds = 1 / 298.257222101
-        self.sign_set_ell_e_gps = np.sqrt(1 - (1 - sign_set_ell_f_gps) ^ 2)
-        self.sign_set_ell_e_bds = np.sqrt(1 - (1 - sign_set_ell_f_bds) ^ 2)
+        self.sign_set_ell_e_gps = np.sqrt(1 - np.square(1 - self.sign_set_ell_f_gps))
+        self.sign_set_ell_e_bds = np.sqrt(1 - np.square(1 - self.sign_set_ell_f_bds))
         self.sign_set_gm_gps = 3.986005e14
         self.sign_set_gm_bds = 3.986004418e14
         self.sign_set_earth_wie_gps = 7.2921151467e-5
