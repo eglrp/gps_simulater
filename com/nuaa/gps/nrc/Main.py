@@ -1,6 +1,7 @@
 import numpy as np
 
 from com.nuaa.gps.nrc.entity.eph import eph
+from com.nuaa.gps.nrc.config.configuration import gpsConfig
 from com.nuaa.gps.nrc.utils.file_reader_utils import readFile
 
 data_file_directory = '../../../../data/rinex/'
@@ -16,6 +17,8 @@ class main_service:
                     'brdc1980.17n': self.eph_list_brdc0060,
                     'lpil1910.09n': self.eph_list_brdc0060}
         self.parse_directory(data_file_directory)
+
+        gps_config = gpsConfig();
 
     def parse_directory(self, data_file_directory):
         [self.aa(data_file_directory, key) for key in self.dic.keys()]
