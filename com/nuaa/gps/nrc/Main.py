@@ -66,8 +66,8 @@ class main_service:
         for i in range(1, sign_set.sign_set_data_length):
             for k in range(1, sign_set.sign_set_prnmat):
                 trans_set.Bk3[k, :, i] = np.mat([gnss_dd.dde1x[k, i],
-                                          gnss_carrier_dd.dde1y[k, i],
-                                          gnss_carrier_dd.dde1z[k, i]]);
+                                                 gnss_carrier_dd.dde1y[k, i],
+                                                 gnss_carrier_dd.dde1z[k, i]]);
 
         Xb, ddN1 = LSbaseline_ErrorModel(gnss_dd, trans_set, gnss_obs);
 
@@ -91,6 +91,7 @@ class main_service:
                         + np.square(trans_set.Xb_real(
                     3, i))));
             Baseline_error[i, 1] = Baseline_real[i, 1] - Baselinelength[i, 1];
+
 
 if __name__ == '__main__':
     service = main_service(data_file_directory)

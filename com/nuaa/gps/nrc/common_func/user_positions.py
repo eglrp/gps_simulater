@@ -4,9 +4,9 @@ from com.nuaa.gps.nrc.common_func.geo_ecef import geo_ccef
 from com.nuaa.gps.nrc.common_func.trace_velo import trace_velo
 
 import numpy as np
-import math.cos as cos
-import math.sin as sin
-import math.pi as pi
+from math import cos
+from math import sin
+from math import pi
 
 
 def user_positions(t, T, atti, atti_rate, veloB, acceB, posi):
