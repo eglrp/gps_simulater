@@ -3,6 +3,7 @@ import numpy as np
 from com.nuaa.gps.nrc.common_func.gnss_carrier_dd import gnss_carrier_dd
 from com.nuaa.gps.nrc.common_func.gnss_observations import gnss_observations
 from com.nuaa.gps.nrc.common_func.lamcacamb import LamCacAmb
+from com.nuaa.gps.nrc.common_func.lsbaseline_ambfixed import LSbaseline_Ambfixed
 from com.nuaa.gps.nrc.common_func.lsbaseline_errormodel import LSbaseline_ErrorModel
 from com.nuaa.gps.nrc.common_func.satellite_positions import satellite_positions
 from com.nuaa.gps.nrc.common_func.user_positions import user_positions
