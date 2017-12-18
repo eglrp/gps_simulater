@@ -37,7 +37,7 @@ class gpsConfig:
         self.sign_set_std_phase_if = 0.009
         self.sign_set_delta_clock = 4.47e-09
         self.sign_set_delta_r_clock = 31
-        self.sign_set_eph_file = 'G:\matlab\GNSS_INS组合相对导航\RINEX\brdc1980.17n'
+        self.sign_set_eph_file = 'G:\matlab\GNSS_INS组合相对导航\RINEX\\brdc1980.17n'
         self.sign_set_prnmat = np.array([2, 5, 7, 9, 10, 25, 30])
         self.sign_set_start_time = 0
         self.sign_set_end_time = 20
