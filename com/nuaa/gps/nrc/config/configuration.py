@@ -1,5 +1,7 @@
 import numpy as np
 
+from com.nuaa.gps.nrc.config.transConfig import transferConfig
+
 
 class gpsConfig:
     def __init__(self):
@@ -50,3 +52,8 @@ class gpsConfig:
         self.sign_set_init_velo_m = [0, 0, 0]
         self.sign_set_init_velo_r = [0, 0, 0]
         self.sign_set_t_sate = 86400
+
+
+global_gpsConfig = gpsConfig()
+
+global_transfer_Config = transferConfig(global_gpsConfig)
