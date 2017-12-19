@@ -19,4 +19,4 @@ def geo_ccef(posi_geo):
     X = (Rn + heig) * math.cos(lati) * math.cos(long);
     Y = (Rn + heig) * math.cos(lati) * math.sin(long);
     Z = (Rn * np.square(1 - f) + heig) * math.sin(lati);
-    return np.array([X, Y, Z])
+    return np.mat([[X], [Y], [Z]])

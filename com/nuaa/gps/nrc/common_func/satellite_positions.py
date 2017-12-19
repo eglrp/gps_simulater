@@ -7,25 +7,25 @@ from com.nuaa.gps.nrc.config.configuration import global_gpsConfig
 
 
 def satellite_positions(gps_config, t, orbit):
-    nsat = len(gps_config.sign_set_prnmat);
-    time_m = np.zeros((nsat, 1));
-    time_r = np.zeros((nsat, 1));
-    xs_tx = np.zeros((nsat, 3));
-    vs_tx = np.zeros((nsat, 3));
+    nsat = len(gps_config.sign_set_prnmat)
+    time_m = np.zeros((nsat, 1))
+    time_r = np.zeros((nsat, 1))
+    xs_tx = np.zeros((nsat, 3))
+    vs_tx = np.zeros((nsat, 3))
     # position in GEOREF : long (deg)  lati (deg)  alti (m)
     posi_m = gps_config.sign_set_init_posi_m
     posi_r = gps_config.sign_set_init_posi_r
 
     # Master
-    trace_m_posi__geo = posi_m;
-    trace_m_posi__ecef = geo_ccef(posi_m);
+    trace_m_posi__geo = posi_m
+    trace_m_posi__ecef = geo_ccef(posi_m)
 
     # Rover
-    tracer_posi_geo = posi_r;
-    tracer_posi_ecef = geo_ccef(posi_r);
+    tracer_posi_geo = posi_r
+    tracer_posi_ecef = geo_ccef(posi_r)
 
-    Xr1 = tracer_posi_ecef;
-    t_orbit = gps_config.sign_set_t_sate + t;
+    Xr1 = tracer_posi_ecef
+    t_orbit = gps_config.sign_set_t_sate + t
     time_r = ''
 
     for j in range(nsat):
@@ -33,38 +33,38 @@ def satellite_positions(gps_config, t, orbit):
         position = np.array(orbit[j, :])[0]
         print(t_orbit)
         print(position)
-        Xs, Vs = sate_posivelo(t_orbit, position);  # 信号接收时刻卫星位置
-        Tp1 = ((Xs - Xr1).T * (Xs - Xr1)) / global_gpsConfig.sign_set_c;
-        Tp_old1 = 0;
+        Xs, Vs = sate_posivelo(t_orbit, position)  # 信号接收时刻卫星位置
+        Tp1 = ((Xs - Xr1).T * (Xs - Xr1)) / global_gpsConfig.sign_set_c
+        Tp_old1 = 0
         while (Tp1 - Tp_old1) > (1e-12):
-            Xs, Vs = sate_posivelo(t_orbit - Tp1, position);
-            C = np.matrix(
-                [math.cos(global_gpsConfig.sign_set_wiee * Tp1), math.sin(global_gpsConfig.sign_set_wie * Tp1), 0],
+            Xs, Vs = sate_posivelo(t_orbit - Tp1, position)
+            C = np.matrix([
+                [math.cos(global_gpsConfig.sign_set_wie * Tp1), math.sin(global_gpsConfig.sign_set_wie * Tp1), 0],
                 [-math.sin(global_gpsConfig.sign_set_wie * Tp1), math.cos(global_gpsConfig.sign_set_wie * Tp1), 0],
-                [0, 0, 1])
-            Xs = C * Xs;
-            Vs = C * Vs;
-            Tp_old1 = Tp1;
-            Tp1 = np.sqrt((Xs - Xr1).transpose() * (Xs - Xr1)) / global_gpsConfig.sign_set_c;
-        time_m[j, 1] = Tp1;
-        xs_tx[j, :], vs_tx[j, :] = sate_posivelo(t_orbit - time_m[j, 1], position)
+                [0, 0, 1]])
+            Xs = C * Xs
+            Vs = C * Vs
+            Tp_old1 = Tp1
+            Tp1 = (np.sqrt((Xs - Xr1).T * (Xs - Xr1))) / global_gpsConfig.sign_set_c
+        time_m[j, 0] = Tp1
+        xs_tx[j, :], vs_tx[j, :] = sate_posivelo(t_orbit - time_m[j, 0], position)
 
-    Xr2 = tracer_posi_ecef;
+    Xr2 = tracer_posi_ecef
     for j in range(nsat):
         position = np.array(orbit[j, :])[0]
-        Xs, Vs = sate_posivelo(t_orbit, position);
-        Tp2 = np.sqrt((Xs - Xr2).transpose() * (Xs - Xr2)) / global_gpsConfig.sign_set_c;
-        Tp_old2 = 0;
+        Xs, Vs = sate_posivelo(t_orbit, position)
+        Tp2 = np.sqrt((Xs - Xr2).transpose() * (Xs - Xr2)) / global_gpsConfig.sign_set_c
+        Tp_old2 = 0
         while ((Tp2 - Tp_old2) > 1e-12):
-            Xs, Vs = sate_posivelo(t_orbit - Tp2, position);
+            Xs, Vs = sate_posivelo(t_orbit - Tp2, position)
             C = np.matrix(
                 [math.cos(global_gpsConfig.sign_set_wie * Tp2), math.sin(global_gpsConfig.sign_set_wie * Tp2), 0],
                 [-math.sin(global_gpsConfig.sign_set_wie * Tp2), math.cos(global_gpsConfig.sign_set_wie * Tp2), 0],
                 [0, 0, 1])
-            Xs = C * Xs;
-            Vs = C * Vs;
-            Tp_old2 = Tp2;
-            Tp2 = np.sqrt((Xs - Xr2).transpose() * (Xs - Xr2)) / global_gpsConfig.sign_set_c;
-    time_r[j, 1] = Tp2;
-    xs_tx[j, :], vs_tx[j, :] = sate_posivelo(t_orbit - time_r(j, 1), position);
+            Xs = C * Xs
+            Vs = C * Vs
+            Tp_old2 = Tp2
+            Tp2 = np.sqrt((Xs - Xr2).transpose() * (Xs - Xr2)) / global_gpsConfig.sign_set_c
+    time_r[j, 1] = Tp2
+    xs_tx[j, :], vs_tx[j, :] = sate_posivelo(t_orbit - time_r(j, 1), position)
     return xs_tx, vs_tx, time_m, time_r
