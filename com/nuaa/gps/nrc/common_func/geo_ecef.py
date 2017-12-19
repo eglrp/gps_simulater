@@ -9,9 +9,9 @@ def geo_ccef(posi_geo):
     g = 9.7803698;
 
     # user position(rad)
-    long = posi_geo[1] * math.pi / 180.0;
-    lati = posi_geo[2] * math.pi / 180.0;
-    heig = posi_geo[3];
+    long = posi_geo[0] * math.pi / 180.0;
+    lati = posi_geo[1] * math.pi / 180.0;
+    heig = posi_geo[2];
 
     # earth ellipticity
     Rn = re * (1 + f * math.sin(lati) * math.sin(lati));

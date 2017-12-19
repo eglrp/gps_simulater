@@ -20,11 +20,15 @@ class main_service:
     eph_list_ipil1910 = []
 
     def __init__(self, data_file_directory):
-        self.dic = {'brdc0060.10n': self.eph_list_brdc0060,
-                    'brdc1980.17n': self.eph_list_brdc0060,
-                    'lpil1910.09n': self.eph_list_brdc0060}
+        self.dic = {'brdc0060.10n': self.eph_list_brdc0060}
+              #      'brdc1980.17n': self.eph_list_brdc0060,
+              #      'lpil1910.09n': self.eph_list_brdc0060}
         self.parse_directory(data_file_directory)
-        self.orbit = self.eph_list_brdc0060[0:32]
+        self.get_matrix()
+        self.get_guan();
+
+    def get_matrix(self):
+        self.orbit = np.mat([x.position for x in self.eph_list_brdc0060[0:32]])
 
     def parse_directory(self, data_file_directory):
         [self.aa(data_file_directory, key) for key in self.dic.keys()]
@@ -51,7 +55,7 @@ class main_service:
     def get_guan(self):
         for t in np.arange(start=sign_set.sign_set_start_time, stop=sign_set.sign_set_end_time,
                            step=sign_set.sign_set_td_period):
-            xs_tx, vs_tx, time_m, time_r = satellite_positions(trans_set, t, self.orbit);
+            xs_tx, vs_tx, time_m, time_r = satellite_positions(sign_set, t, self.orbit);
             xr_m, vr_m = user_positions(t, trans_set.T, trans_set.atti_M,
                                         trans_set.atti_rate_M, trans_set.veloB_M,
                                         trans_set.acceB_M, trans_set.posi_M);
