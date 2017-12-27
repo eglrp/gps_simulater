@@ -10,7 +10,7 @@
 clear all;
 close all;
 clc;
-
+%add zhujie%
 %% %%%%%%%%%Get initial settings %%%%%%%%%%%%%%%%%
 global sign_set
 %  获得初始化参数
