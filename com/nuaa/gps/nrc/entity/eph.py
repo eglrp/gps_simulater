@@ -1,4 +1,5 @@
 import re
+import numpy as np
 
 
 class eph:
@@ -13,4 +14,8 @@ class eph:
             self.hour = s[4]
             self.minute = s[5]
             self.second = s[6]
-            self.position = s[7:-1]
+            list = []
+            list.extend(s[10:25])
+            list.extend(s[7:11])
+            list.append(self.second)
+            self.position = [float(x) for x in list]
