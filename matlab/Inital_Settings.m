@@ -11,12 +11,12 @@ function sign_set = Inital_Settings()
 sign_set.c = 299792458;        % light speed (m/s)
 sign_set.g = 9.7803698;         % gravity (m/s^2)
 sign_set.wie   = 7.2921151467e-5;       %地球自转角速度
-sign_set.PI_orbit = 3.1415926535898;         % pi value used for orbit computation
+%sign_set.PI_orbit = 3.1415926535898;         % pi value used for orbit computation
 
-sign_set.ell_a_GPS = 6378137;                          % GPS (WGS-84)      Ellipsoid semi-major axis [m]
-sign_set.ell_f_GPS = 1/298.257223563;                  % GPS (WGS-84)      Ellipsoid flattening
-sign_set.ell_e_GPS  = sqrt(1-(1-sign_set.ell_f_GPS)^2);    % GPS (WGS-84)      Eccentricity
-sign_set.GM_GPS = 3.986005e14;                        % GPS     Gravitational constant * (mass of Earth) [m^3/s^2]
+%sign_set.ell_a_GPS = 6378137;                          % GPS (WGS-84)      Ellipsoid semi-major axis [m]
+%sign_set.ell_f_GPS = 1/298.257223563;                  % GPS (WGS-84)      Ellipsoid flattening
+%sign_set.ell_e_GPS  = sqrt(1-(1-sign_set.ell_f_GPS)^2);    % GPS (WGS-84)      Eccentricity
+%sign_set.GM_GPS = 3.986005e14;                        % GPS     Gravitational constant * (mass of Earth) [m^3/s^2]
 
 %%  CONSTELLATION SPECIFIC ================================================
 %GPS 频率  [Hz]
@@ -43,7 +43,7 @@ sign_set.PRNmat          =[01 02 03 04 05 06 07 08 09 10 ...
 % 仿真开始时间(秒)
 sign_set.start_time      = 0;
 % 仿真结束时间(秒) 
-sign_set.end_time        =50; 
+sign_set.end_time        =1; 
 %%%%%%%%%%%%%%%%%%%%%%%%%
 % 航迹生成(传输延时）周期
 sign_set.TDperiod             = 0.2;

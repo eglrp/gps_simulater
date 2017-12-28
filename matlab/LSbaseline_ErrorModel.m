@@ -1,4 +1,4 @@
-function [Xb, ddN1]=LSbaseline_ErrorModel(ddph1,ddN1,ddph2,ddN2, Bk3,Xb0)
+function [Xb, ddN1]=LSbaseline_ErrorModel(nsat,ddpr1, ddpr2, ddph1, ddph2, ddN1, ddN2, Bk3)
 %	载波观测方程利用最小二乘法求解M-R基线矢量
 %	Input: 
 %         ddph1 ddph2         L1、L2频点双差载波观测值
@@ -12,19 +12,17 @@ function [Xb, ddN1]=LSbaseline_ErrorModel(ddph1,ddN1,ddph2,ddN2, Bk3,Xb0)
 %==========================================================================
 %% Initialize ======================================================
 global sign_set;
-%基线坐标
-delta_xb  =zeros(3,1);    %   Xb=[delta_x  delta_y  delta_z]
-Xb  =zeros(3,sign_set.datalength); 
-delta_ddN =zeros(length(sign_set.PRNmat),1);   
 
 %%  最小二乘求解基线矢量
 for i=1: sign_set.datalength  
 % 最小二乘法求解基线矢量
-    ks=length(sign_set.PRNmat);
+    ks=nsat(1,i);                % 观测时刻可见星数目
    
+    %% 设置随机模型
     D1 = 2*(ones(ks-1,ks-1) + eye(ks-1))*(sign_set.Phase*sign_set.G_bo1)^2;        %求权矩阵  GPS-王惠南 P161页  公式（6.104）
     P1 = inv(D1);      %求协方差矩阵 最小二乘中的权重值
 
+    %% 构建双差函数模型（观测模型）
      Af = Bk3(:,:,i);          %载波的矩阵方程基线改正数系数A      (A B)*[delta_Xb  delta_ddN]'=L
      Bf=  sign_set.G_bo1*eye(ks-1);            % 双差模糊度改正数系数B
      Lf = sign_set.G_bo1*(ddph1(:,i)+ddN1(:,i)+Af*Xb(:,i));
